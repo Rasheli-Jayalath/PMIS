@@ -1,0 +1,210 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/PMIS/index.html">
+        <i class="mdi mdi-home menu-icon"></i>
+        <span class="menu-title">Home</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="mdi mdi-information menu-icon"></i>
+        <span class="menu-title">About</span>
+      </a>
+    </li>
+
+    <li class="nav-item nav-category">Dashboards</li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        data-bs-toggle="collapse"
+        href="#kfi-dashboard"
+        aria-expanded="false"
+        aria-controls="kfi-dashboard"
+      >
+        <!-- <i class="mdi mdi-grid-large menu-icon"></i> -->
+        <span class="menu-title">KFI Dashboards</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="kfi-dashboard">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="/PMIS/pages/kfi-dashboard/kfi_dashboard.php"
+              >KFIs Dashboard</a
+            >
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item nav-category">Project Tools</li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        data-bs-toggle="collapse"
+        href="#project-tools"
+        aria-expanded="false"
+        aria-controls="project-tools"
+      >
+        <i class="mdi mdi-layers-outline menu-icon"></i>
+        <span class="menu-title">Project Tools</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="project-tools">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="/PMIS/pages/project-tools/pictorial_analysis/analysis.php"
+              >Pictorial Analysis</a
+            >
+          </li>
+        </ul>
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="/PMIS/pages/project-tools/maps_drawings/dm_drawingmap.php">Maps and Drawings</a>
+          </li>
+        </ul>
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="/PMIS/pages/project-tools/project_issues/project_issues_info.php">Project Issues</a>
+          </li>
+        </ul>
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="/PMIS/pages/project-tools/ncn/project_nonconfirmity_info.php">Non Conformity Notices</a>
+          </li>
+        </ul>
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Design Progress</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item nav-category">Administration</li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        data-bs-toggle="collapse"
+        href="#admin-pro-setup"
+        aria-expanded="false"
+        aria-controls="admin-pro-setup"
+      >
+        <i class="mdi mdi-chart-line menu-icon"></i>
+        <span class="menu-title">Project Setup</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="admin-pro-setup">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Project Details</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        data-bs-toggle="collapse"
+        href="#admin-bdata-setup"
+        aria-expanded="false"
+        aria-controls="admin-bdata-setup"
+      >
+        <i class="mdi mdi-floor-plan menu-icon"></i>
+        <span class="menu-title">Base Data Setup</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="admin-bdata-setup">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Step 1 - BOQ Entry</a>
+          </li>
+        </ul>
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Step 2 - Baseline Entry</a>
+          </li>
+        </ul>
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Step 3 - Activities Entry</a>
+          </li>
+        </ul>
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Step 4 - KPIs Entry</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        data-bs-toggle="collapse"
+        href="#admin-data-up"
+        aria-expanded="false"
+        aria-controls="admin-data-up"
+      >
+        <i class="mdi mdi-file-document-box menu-icon"></i>
+        <span class="menu-title">Data Updation</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="admin-data-up">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="/PMIS/pages/administration/Data_Updation/control_panel_IPC.php"
+              >Step 1 - IPC Entry</a
+            >
+          </li>
+        </ul>
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Step 2 - Progress Entry</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item nav-category">Settings</li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        href="/PMIS/pages/user-access-manage/user_mangement.php"
+      >
+        <i class="mdi mdi-account-key menu-icon"></i>
+        <span class="menu-title">Super Admin</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="mdi mdi-logout menu-icon"></i>
+        <span class="menu-title">Logout</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<script>
+  // function viewHorizontalNav() {
+  //   sessionStorage.clear();
+
+  //   sessionStorage.setItem("NAVTYPE", "HORZNAV");
+
+  //   document.getElementById("navbarburgericon").style.display = "none";
+  //   document.getElementById("horizontalnavbar").style.display = "block";
+  //   document.getElementById("pagebodywraper").style.marginTop = "55px";
+  //   document.getElementById("partials-sidebar-offcanvas").style.display =
+  //     "none";
+  //   document.getElementById("mainpanel").style.width = "100%";
+  //   document.getElementById("offcanvabutton").style.left = "-10px";
+  // }
+</script>
