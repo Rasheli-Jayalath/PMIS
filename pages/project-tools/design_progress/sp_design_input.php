@@ -188,98 +188,179 @@ $pdData1=$objDb->dbFetchArray();
 	$remarks=$pdData1['remarks'];
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<?php //include ('includes/metatag.php'); ?>
-
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Manage Videos<</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../../../vendors/feather/feather.css">
+  <link rel="stylesheet" href="../../../endors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../../../vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="../../../vendors/typicons/typicons.css">
+  <link rel="stylesheet" href="../../../vendors/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="../../../vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="../../../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="../../js/select.dataTables.min.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../../../css/vertical-layout-light/style.css">
+  <link rel="stylesheet" href="../../../css/basic-styles.css">
+ <!-- endinject -->
+  <link rel="shortcut icon" href="../../images/favicon.png" />
 </head>
+
+
 <body>
-
-<div id="wrap">
- 
-<div id="content">
-   <table class="issues" width="100%" style="background-color:#FFF">
-  <tr ><th>Design Progress<span style="float:right"><form action="sp_design.php" method="post"><input type="submit" name="back" id="back" value="BACK" /></form></span></th></tr>
-  <tr style="height:45%"><td align="center">
-  <?php echo $message; ?>
-  <form action="sp_design_input.php" target="_self" method="post" >
-  <table class="issues" width="100%" style="background-color:#FFF">
-  <tr><td><label>Serial #:</label></td><td><input  type="text" name="serial" id="serial" value="<?php echo $serial; ?>" /></td></tr>
-  
-    <tr>
-      <td><label>Major Item:</label></td>
-      <td><select id="item_id" name="item_id">
-      <option value="">Select Major Item</option>
-      <?php $pdSQL = "SELECT item_id, pid, title FROM  t014majoritems  order by item_id";
-						 $pdSQLResult = $objDb->dbQuery($pdSQL);
-						$i=0;
-						if($objDb-> totalRecords()>=1);
-							  
-							  {
-							  while($pdData=$objDb->dbFetchArray())
-							  { 
-							  $i++;?>
-  <option value="<?php echo $pdData["item_id"];?>" <?php if($item_id==$pdData["item_id"]) {?> selected="selected" <?php }?>><?php echo $pdData["title"];?></option>
-   <?php } 
-   }?>
-      </select></td>
-    </tr>
-    <tr><td><label>Description:</label></td><td><input  type="text" name="description" id="description" value="<?php echo $description; ?>" /></td></tr>
-    <tr>
-      <td><label>Unit:</label></td>
-      <td><input  type="text" name="unit" id="unit" value="<?php echo $unit; ?>" /></td>
-    </tr>
+  <style>
+    .col-sm-6{
    
-     <tr><td><label>Total:</label></td><td><input  type="text" name="total" id="total" value="<?php echo $total; ?>" /></td></tr>
-     <tr><td><label>Design Submitted:</label></td><td><input  type="text" name="submitted" id="submitted" value="<?php echo $submitted; ?>" /></td></tr>
+    }
 
-     <tr><td><label>Under Revision:</label></td><td><input  type="text" name="revision" id="revision" value="<?php echo $revision; ?>" /></td></tr>
-	
-	  <tr><td><label>Approved :</label></td><td><input  type="text" name="approved" id="approved" value="<?php echo $approved; ?>" /></td></tr>
-	 
-	  <tr>
-	    <td>Approval %:</td><td><input  type="text" name="approvedpct" id="approvedpct" value="<?php echo $approvedpct; ?>" /></td></tr>
-	  <tr>
-	    <td><label>Remarks :</label></td>
-	    <td><input  type="text" name="remarks" id="remarks" value="<?php echo $remarks; ?>" /></td>
-	    </tr>
-	  <tr><td colspan="2"> <?php if(isset($_REQUEST['dgid']))
+    #tworow{
+      padding: 20px;
+    }
+
+    h3{
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    label {
+      font-weight: bold;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 100%;
+    }
+    #inp1{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    table{
+      box-shadow: 0px 2px 5px 1px  rgba(0, 0, 0, 0.3);
+    }
+  </style>
+    <div class="container-fluid">
+
+    <div class=" grid-margin stretch-card " style = "margin-top: 3%;">
+              <div class="card" style="background-image: linear-gradient(180deg, #f0f0fc, #f0f0fc);">
+                <div class="card-body text-center">
+                  <h4 class="card-title">Design Progress</h4>
+				  <?php echo $message; ?>
+                  <form class="forms-sample" action="sp_design_input.php" target="_self" method="post"  >
+				 
+				  <div class="form-group row">
+                    <div class="text-end col-sm-6"> <label> Serial #: </label> </div>
+                      <div class="text-start col-sm-6">
+					     <input class="form-control"  type="text"  name="serial" id="serial" value="<?php echo $serial; ?>"  style="width: 60%;" placeholder="Serial #" Required>
+                      </div>
+                 </div>
+     
+				 <div class="form-group row">
+                    <div class="text-end col-sm-6"> <label>Major Item: </label> </div>
+                      <div class="text-start col-sm-6">
+									<select class="form-control  bg-light text-dark" id="item_id" name="item_id" style="width: 60%;" >
+					<option value="">Select Major Item</option>
+					<?php $pdSQL = "SELECT item_id, pid, title FROM  t014majoritems  order by item_id";
+										$pdSQLResult = $objDb->dbQuery($pdSQL);
+										$i=0;
+										if($objDb-> totalRecords()>=1);
+											
+											{
+											while($pdData=$objDb->dbFetchArray())
+											{ 
+											$i++;?>
+				<option value="<?php echo $pdData["item_id"];?>" <?php if($item_id==$pdData["item_id"]) {?> selected="selected" <?php }?>><?php echo $pdData["title"];?></option>
+				<?php } 
+				}?>
+					</select>
+	              </div>
+                 </div>
+
+				 <div class="form-group row">
+                    <div class="text-end col-sm-6"> <label>Description: </label> </div>
+                      <div class="text-start col-sm-6">
+					     <input class="form-control"  type="text"  name="description" id="description" value="<?php echo $description; ?>"  style="width: 60%;" placeholder="Description" Required>
+                      </div>
+                 </div>
+
+				 <div class="form-group row">
+                    <div class="text-end col-sm-6"> <label>Unit: </label> </div>
+                      <div class="text-start col-sm-6">
+					     <input class="form-control"  type="text"   name="unit" id="unit" value="<?php echo $unit; ?>"  style="width: 60%;" placeholder="Unit" Required>
+                      </div>
+                 </div>
+
+				 <div class="form-group row">
+                    <div class="text-end col-sm-6"> <label> Total:</label> </div>
+                      <div class="text-start col-sm-6">
+					     <input class="form-control"  type="text"  name="total" id="total" value="<?php echo $total; ?>" style="width: 60%;" placeholder="Total" Required>
+                      </div>
+                 </div>
+
+				 <div class="form-group row">
+                    <div class="text-end col-sm-6"> <label> Design Submitted:</label> </div>
+                      <div class="text-start col-sm-6">
+					     <input class="form-control"  type="text" name="submitted" id="submitted" value="<?php echo $submitted; ?>"  style="width: 60%;" placeholder="Design Submitted" Required>
+                      </div>
+                 </div>				 
+				 <div class="form-group row">
+                    <div class="text-end col-sm-6"> <label> Under Revision:</label> </div>
+                      <div class="text-start col-sm-6">
+					     <input class="form-control"  type="text"  name="revision" id="revision" value="<?php echo $revision; ?>"  style="width: 60%;" placeholder="Under Revision" Required>
+                      </div>
+                 </div>				 
+			 
+				 <div class="form-group row">
+                    <div class="text-end col-sm-6"> <label>Approved : </label> </div>
+                      <div class="text-start col-sm-6">
+					     <input class="form-control"  type="text" name="approved" id="approved" value="<?php echo $approved; ?>" style="width: 60%;" placeholder="Approved" Required>
+                      </div>
+                 </div>				 
+				 <div class="form-group row">
+                    <div class="text-end col-sm-6"> <label>Approval %: </label> </div>
+                      <div class="text-start col-sm-6">
+					     <input class="form-control"  type="text"  name="approvedpct" id="approvedpct" value="<?php echo $approvedpct; ?>" style="width: 60%;" placeholder="Approval %" Required>
+                      </div>
+                 </div>
+				 <div class="form-group row">
+                    <div class="text-end col-sm-6"> <label> Remarks :</label> </div>
+                      <div class="text-start col-sm-6">
+					     <input class="form-control"  type="text"  name="remarks" id="remarks" value="<?php echo $remarks; ?>" style="width: 60%;" placeholder="Remarks" Required>
+                      </div>
+                 </div>
+
+				 <?php if(isset($_REQUEST['dgid']))
 	 {
 		 
 	 ?>
 	    <input type="hidden" name="dgid" id="dgid" value="<?php echo $_REQUEST['dgid']; ?>" />
-	    <input  type="submit" name="update" id="update" value="Update" />
-	    <?php
+	    <button  type="submit" class="btn btn-primary me-2" name="update" id="update" value="Update" style="width:20%">Update</button>
+		<button class="btn btn-light" type="button" style="width:20%" onclick="history.back()">Cancel</button>
+	   <?php
 	 }
 	 else
 	 {
 	 ?>
-	    <input  type="submit" name="save" id="save" value="Save" />
-	    <?php
+	    <button  type="submit" class="btn btn-primary me-2" name="save" id="save" value="Save" style="width:20%">Save</button>
+		<button class="btn btn-light" type="button" style="width:20%" onclick="javascript:window.close()">Cancel</button>
+		<?php
 	 }
-	 ?> <input  type="submit" name="cancel" id="cancel" value="Cancel" /></td></tr>
-	 </table>
-	  
-	  
-  
-  
-  </form> 
-  </td></tr>
-  
-  </table>
-  </figure>
-</div>
-<br clear="all" />
-	
-	
-	
-<div id="search"></div>
-	<div id="without_search"></div>
-
-</div>
+	 ?> 
  
-</div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+
+			<div id="search"></div>
+	<div id="without_search"></div>
+    </div><!-- class="container" -->
 </body>
 </html>
 

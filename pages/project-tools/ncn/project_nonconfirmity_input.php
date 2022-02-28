@@ -316,9 +316,7 @@ function doFilter(frm){
   border-radius: 5px 5px;
   color: white;
   font-size: 100%;
-  /* margin-right: 5%; */
-  /* right: 5%;
-  left: 5%; */
+
 
 
 }
@@ -658,7 +656,7 @@ table{
 	 ?>
      <input type="hidden" name="nos_id" id="nos_id" value="<?php echo $_REQUEST['nos_id']; ?>" />
      <button  type="submit" name="update" class="btn btn-primary me-2" id="update" value="<?php echo UPDATE?>" style="width:20%"> Update</button>
-	 <button class="btn btn-light" type="button" style="width:20%" ><a href="project_nonconfirmity_info.php" style="text-decoration: none; color: inherit">Cancel</a></button>
+	 <button class="btn btn-light" onclick="history.back()" type="button" style="width:20%" ><a href="project_nonconfirmity_info.php" style="text-decoration: none; color: inherit">Cancel</a></button>
 
 	 <?php
 	 }

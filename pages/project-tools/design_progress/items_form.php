@@ -1,37 +1,7 @@
 <?php
-/*error_reporting(E_ALL & ~E_NOTICE);
-@require_once("requires/session.php");
-$module		= "Design Progress Major Items";
-if ($uname==null  ) {
-header("Location: index.php?init=3");
-}
-else if ($dp_flag==0 ) {
-header("Location: index.php?init=3");
-}  
-$edit			= $_GET['edit'];
-$objDb  		= new Database( );
-@require_once("get_url.php");
-$msg						= "";
-
- $pSQL = "SELECT max(pid) as pid from project";
-						 $pSQLResult = mysql_query($pSQL);
-						 $pData = mysql_fetch_array($pSQLResult);
-						 $pid=$pData["pid"];*/
 require_once('../../../rs_lang.admin.php');
 require_once('../../../rs_lang.eng.php');
 include_once("../../../config/config.php");
-//$ObjMapDrawing  = new  MapsDrawings();
-//$ObjMapDrawing2 = new MapsDrawings();
-//$ObjMapDrawing3 = new MapsDrawings();
-//$ObjMapDrawing4 = new MapsDrawings();
-//$user_cd=1;
-//$_SESSION['ne_user_type']=1;
-//$data_url="drawings/";
-//$file_path="pictorial_data";
-//$data_url="photos/";
-
- //$album_id=$_REQUEST['album_id'];
-
 $edit			= $_GET['edit'];
 $revert			= $_GET['revert'];
 $objDb  		= new Database( );
@@ -42,7 +12,6 @@ $user_cd=1;
 $pSQL = "SELECT max(pid) as pid from project";
 $objDb->dbQuery($pSQL);
 $pData =$objDb->dbFetchArray();
-//$pData = mysql_fetch_array($pSQLResult);
  $pid=$pData["pid"];	
   $dpentry_flag=1;
  $dpadm_flag=1;					 
@@ -52,7 +21,6 @@ $item_id=$_REQUEST['item_id'];
 $pdSQL1="SELECT item_id, pid, title FROM  t014majoritems  WHERE  item_id = ".$item_id;
 $pdSQLResult1 =$objDb->dbQuery($pdSQL1);
  $pdData1=$objDb->dbFetchArray();
-//$pdData1 = mysql_fetch_array($pdSQLResult1);
 
 $title=$pdData1['title'];
 }
@@ -82,9 +50,9 @@ $title=$_REQUEST['title'];
 $pdSQL = "SELECT a.item_id, a.pid FROM  t014majoritems a WHERE pid = ".$pid." and item_id=".$item_id." order by item_id";
 $pdSQLResult = $objDb->dbQuery($pdSQL);
 $sql_num=$objDb-> totalRecords();
-//$sql_num=mysql_num_rows($pdSQLResult);
+
 $pdData=$objDb->dbFetchArray();
-//$pdData = mysql_fetch_array($pdSQLResult);
+
 $item_id=$_REQUEST['item_id'];
 
 		
@@ -110,61 +78,125 @@ if(isset($_REQUEST['cancel']))
     print "</script>";
 }
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
 <script>
 window.onunload = function(){
 window.opener.location.reload();
 };
 </script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<div id="content">
-<!--<h1> Location Control Panel</h1>-->
-<table align="center">
-  <tr style="height:10%">
-    <td align="center" style="font-family:Verdana, Geneva, sans-serif; font-size:24px; font-weight:bold;"><span>Major Items</span></td></tr>
-  <tr ><td align="center">
-  <?php echo $message; ?>
-  <div id="LoginBox" class="borderRound borderShadow" >
-  <form action="items_form.php" target="_self" method="post"  enctype="multipart/form-data">
- <table border="0"  height="23%" cellspacing="5" style="padding:5px 0 5px 5px; margin:5px 0 5px 5px;">
-  <tr><td><label><?php echo "Item Description:";?></label></td>
-  <td><input type="text" name="title" id="title" value="<?php echo $title;?>"   size="100"/></td>
-  </tr>
-  
-  <tr><td colspan="2"> <?php if(isset($_REQUEST['item_id']))
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Major Items </title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../../../vendors/feather/feather.css">
+  <link rel="stylesheet" href="../../../endors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../../../vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="../../../vendors/typicons/typicons.css">
+  <link rel="stylesheet" href="../../../vendors/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="../../../vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="../../../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="../../js/select.dataTables.min.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../../../css/vertical-layout-light/style.css">
+  <link rel="stylesheet" href="../../../css/basic-styles.css">
+ <!-- endinject -->
+  <link rel="shortcut icon" href="../../images/favicon.png" />
+</head>
+
+
+<body>
+  <style>
+    .col-sm-6{
+
+		
+    }
+
+    #tworow{
+      padding: 20px;
+    }
+
+    h3{
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    label {
+      font-weight: bold;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 100%;
+    }
+    #inp1{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    table{
+      box-shadow: 0px 2px 5px 1px  rgba(0, 0, 0, 0.3);
+    }
+  </style>
+    <div class="container-fluid">
+
+    <div class=" grid-margin stretch-card " style = "margin-top: 3%;">
+              <div class="card" style="background-image: linear-gradient(180deg, #f0f0fc, #f0f0fc);">
+                <div class="card-body text-center">
+                  <h4 class="card-title">Major Items</h4>
+				  <?php echo $message; ?>
+                  <form class="forms-sample" action="items_form.php" target="_self" method="post"  enctype="multipart/form-data">
+				  <div class="form-group row">
+                    <div class="text-end col-sm-6"> <label>Item Description : </label> </div>
+                      <div class="text-start col-sm-6">
+					     <input class="form-control"  type="text"   name="title" id="title" value="<?php echo $title;?>"  style="width: 60%;" placeholder="Item Description " Required>
+                      </div>
+                 </div>	
+
+				 <?php if(isset($_REQUEST['item_id']))
 	 {
 		 
 	 ?>
      <input type="hidden" name="item_id" id="item_id" value="<?php echo $_REQUEST['item_id']; ?>" />
-     <input  type="submit" name="update" id="update" value="Update" />
+     <button type="submit" class="btn btn-primary me-2"  name="update" id="update" value="Update" style="width:20%">Update</button>
+	 <button class="btn btn-light" type="button" style="width:20%" onclick="history.back()">Cancel</button>
 	 <?php
 	 }
 	 else
 	 {
 	 ?>
-	 <input  type="submit" name="save" id="save" value="Save" />
+	 <button type="submit" class="btn btn-primary me-2"  name="save" id="save" value="Save" style="width:20%">Save</button>
+	 <button class="btn btn-light" type="button" style="width:20%" onclick="javascript:window.close()">Cancel</button>	
 	 <?php
 	 }
-	 ?> <input  type="submit" name="cancel" id="cancel" value="Cancel" /></td></tr>
-	 </table>
-	
-  </form> 
-  </div>
-  </td></tr>
-  </table>
-<table style="width:100%; height:100%">
-  <tr>
-  <td>
-   <div style="overflow-y: scroll; height:360px;">
-  <table class="reference" style="width:100%">
-                              <thead>
-                                <tr bgcolor="#333333" style="text-decoration:inherit; color:#CCC">
-                                  <th style="text-align:center; vertical-align:middle">S#</th>
-                                  <th width="70%" style="text-align:center">Title</th>
+	 ?> 
+       </form>
+                </div>
+              </div>
+            </div>
+
+    <div class="row">
+
+    <div class="col-sm-12" style="" id="tworow">
+
+
+
+	<table class="reference table table-hover" style="width:100%">
+  <thead class="" style="background-image: linear-gradient(180deg, #c9c9f5, #c9c9f5);">
+                                <tr style="">
+                                  <th style="font-weight: 900; text-align:center; vertical-align:middle">S#</th>
+                                  <th width="70%" style="font-weight: 900; text-align:center">Title</th>
                                 
 								  <?php if($dpentry_flag==1 || $dpadm_flag==1)
 								  {
 								   ?>
-								 <th style="text-align:center" colspan="2">Action</th>
+								 <th style="font-weight: 900; text-align:center" colspan="2">Action</th>
 								  <?php
 								  }
 								  ?>
@@ -193,7 +225,8 @@ window.opener.location.reload();
                           <?php  if($dpentry_flag==1 || $dpadm_flag==1)
 								  {
 								   ?>
-						   <td align="right"><span style="float:right"><form action="items_form.php?item_id=<?php echo $pdData['item_id'] ?>" method="post"><input type="submit" name="edit" id="edit" value="Edit" /></form></span></td>
+						   <td align="right"><span style="float:right"><form action="items_form.php?item_id=<?php echo $pdData['item_id'] ?>" method="post">
+						   <button type="submit" class="btn btn-outline-warning btn-fw  py-1 " name="edit" id="edit" value="Edit" > <i class="ti-pencil" ></i> EDIT </button></form></span></td>
 						    <?php  
 							}
 							if($ncfadm_flag==1)
@@ -203,7 +236,7 @@ window.opener.location.reload();
 						   <span style="float:right">
 						   </form></span><span style="float:right"><form action="items_form.php?item_id=<?php echo $pdData['item_id'] ?>" method="post">
 						   
-						   <input type="submit" name="delete" id="delete" value="Del" onclick="return confirm('Are you sure?')" /></form></span></td>
+						   <button type="submit" class="btn btn-outline-danger btn-fw  py-1 " name="delete" id="delete" value="Del" onclick="return confirm('Are you sure?')" > <i class="ti-trash" ></i> DELETE </button> </form></span></td>
 						  <?php
 						   }
 						   ?>
@@ -223,12 +256,9 @@ window.opener.location.reload();
                             
                               </tbody>
                         </table>
-                        </div>
-                        </td>
-                        </tr>
-  </table>
-</div>
 
-<?php
-	//$objDb  -> close( );
-?>
+</div><!-- tworow -->
+</div><!-- class="row" -->
+    </div><!-- class="container" -->
+</body>
+</html>
