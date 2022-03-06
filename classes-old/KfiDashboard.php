@@ -108,6 +108,13 @@ class KfiDashboard extends Database{
     public function getActivity_LevelData()
 	{
         $itemids = $this->getProperty("itemids");
+
+        // $Sql = "SELECT 
+		// *
+		// FROM boqdata a
+		// 		WHERE 
+        //         a.parentcd=".$itemids." ORDER BY a.itemid ASC";
+
         $Sql = "SELECT *
         FROM boqdata
         WHERE parentcd = ".$itemids." 
@@ -203,24 +210,8 @@ class KfiDashboard extends Database{
 
     public function getLastIpcNo()
 	{
-		
     
-        $Sql = "SELECT * FROM ipc WHERE 1=1  ";
-		
-		
-		if($this->isPropertySet("ipcno", "V"))
-			$Sql .= " AND ipcno='" . $this->getProperty("ipcno")."'";
-			
-		
-		if($this->isPropertySet("ipcmonth", "V"))
-			$Sql .= " AND ipcmonth='" . $this->getProperty("ipcmonth")."'";
-			
-		
-		if($this->isPropertySet("lid", "V"))
-			$Sql .= " AND lid=" . $this->getProperty("lid");
-			
-			
-			$Sql .= " ORDER BY ipcid ";
+        $Sql = "SELECT * FROM ipc WHERE ipcno LIKE '%IPC-%' ORDER BY ipcid DESC LIMIT 1";
 
         return $this->dbQuery($Sql);
         
@@ -229,25 +220,7 @@ class KfiDashboard extends Database{
     public function getSecondLastIpcNo()
 	{
     
-         $Sql = "SELECT  ipcno, ipcid, ipcmonth, ipcsubmitdate, ipcstartdate, ipcenddate, ipcsubmitdate, lid, status, ipcreceivedate FROM ipc WHERE 1=1  ";
-		
-		
-		if($this->isPropertySet("lastipcno", "V"))
-			$Sql .= " AND ipcno='" . $this->getProperty("lastipcno")."'";
-			
-		
-		//if($this->isPropertySet("ipcmonth", "V"))
-		//	$Sql .= " AND ipcmonth='" . $this->getProperty("ipcmonth")."'";
-			
-		
-		if($this->isPropertySet("lid", "V"))
-			$Sql .= " AND lid=" . $this->getProperty("lid");
-			
-			
-			$Sql .= "  ORDER BY ipcid  ";
-
-       
-	
+        $Sql = "SELECT * FROM ipc WHERE ipcno LIKE '%IPC-%' ORDER BY ipcid DESC LIMIT 2";
 
         return $this->dbQuery($Sql);
         
@@ -255,39 +228,20 @@ class KfiDashboard extends Database{
 
     public function getAllIpcV()
 	{
-      $Sql = "SELECT (a.boq_cur_1_rate*b.ipcqty) as zp, (a.boq_cur_2_rate*b.ipcqty) as qu FROM boq a INNER JOIN ipcv b ON a.boqid=b.boqid WHERE 1=1  ";
-		
-		
-		if($this->isPropertySet("itemid", "V"))
-			$Sql .= " AND a.itemid='" . $this->getProperty("itemid")."'";
-			
-			
-		
-		if($this->isPropertySet("lastipcid", "V"))
-			$Sql .= " AND b.ipcid<=" . $this->getProperty("lastipcid");
-			
-			
-			$Sql .= " ORDER BY b.ipcid ";
-			
-			 return $this->dbQuery($Sql);
-    }
-	
-	  public function getAllIpcV_old()
-	{
         $itemid = $this->getProperty("itemid");
         $lastipcid = $this->getProperty("lastipcid");
 
         //$Sql = "SELECT * FROM ipcv a WHERE a.ipcid < ".$lastipcid." AND a.boqid=".$boqid;
         
-       $Sql = "SELECT (a.boq_cur_1_rate*b.ipcqty) as zp, (a.boq_cur_2_rate*b.ipcqty) as qu FROM boq a INNER JOIN ipcv b ON a.boqid=b.boqid WHERE a.itemid=".$itemid." AND b.ipcid<".$lastipcid;
+        $Sql = "SELECT (a.boq_cur_1_rate*b.ipcqty) as zp, (a.boq_cur_2_rate*b.ipcqty) as qu FROM boq a INNER JOIN ipcv b ON a.boqid=b.boqid WHERE a.itemid=".$itemid." AND b.ipcid<".$lastipcid;
        
         //$Sql = "SELECT SUM(boq.boq_cur_1_rate*ipcv.ipcqty) as x,SUM(boq.boq_cur_2_rate*ipcv.ipcqty) as y FROM boq INNER JOIN ipcv ON boq.boqid=ipcv.boqid WHERE ipcv.ipcid < ".$lastipcid." AND boq.boqid=".$boqid;
         
         return $this->dbQuery($Sql);
         
     }
-	
-	 public function getAllIpcVExup_old()
+
+    public function getAllIpcVExup()
 	{
         $itemid = $this->getProperty("itemid");
         $lastipcid = $this->getProperty("lastipcid");
@@ -299,59 +253,13 @@ class KfiDashboard extends Database{
         
     }
 
-    public function getAllIpcVExup()
-	{
-        $Sql = "SELECT (a.boq_cur_1_rate*b.ipcqty) as xx,(a.boq_cur_2_rate*b.ipcqty) as yy FROM boq a INNER JOIN ipcv b ON a.boqid=b.boqid WHERE 1=1  ";
-		
-		
-		if($this->isPropertySet("itemid", "V"))
-			$Sql .= " AND a.itemid='" . $this->getProperty("itemid")."'";
-			
-			
-		
-		if($this->isPropertySet("lastipcid", "V"))
-			$Sql .= " AND b.ipcid=" . $this->getProperty("lastipcid");
-			
-			
-			$Sql .= " ORDER BY b.ipcid ";
-
-        
-       
-        return $this->dbQuery($Sql);
-        
-    }
-
-    public function getAllIpcVPIn_old()
+    public function getAllIpcVPIn()
 	{
         $itemid = $this->getProperty("itemid");
         $lastipcid = $this->getProperty("lastipcid");
 
         //$Sql = "SELECT * FROM ipcv a WHERE a.ipcid = ".$lastipcid." AND a.boqid=".$boqid;
         $Sql = "SELECT (a.boq_cur_1_rate*b.ipcqty) as xx,(a.boq_cur_2_rate*b.ipcqty) as yy FROM boq a INNER JOIN ipcv b ON a.boqid=b.boqid WHERE a.itemid=".$itemid." AND b.ipcid <= ".$lastipcid;
-       
-        return $this->dbQuery($Sql);
-        
-    }
-
-    public function getAllIpcVPIn()
-	{
-        
-		
-        $Sql = "SELECT (a.boq_cur_1_rate*b.ipcqty) as xx,(a.boq_cur_2_rate*b.ipcqty) as yy FROM boq a INNER JOIN ipcv b ON a.boqid=b.boqid WHERE 1=1  ";
-		
-		
-		if($this->isPropertySet("itemid", "V"))
-			$Sql .= " AND a.itemid='" . $this->getProperty("itemid")."'";
-			
-			
-		
-		if($this->isPropertySet("lastipcid", "V"))
-			$Sql .= " AND b.ipcid<=" . $this->getProperty("lastipcid");
-			
-			
-			$Sql .= " ORDER BY b.ipcid ";
-
-        
        
         return $this->dbQuery($Sql);
         

@@ -21,7 +21,7 @@ class AdminUser extends Database{
 	public $ne_news;
 	public $ne_newsadm;
 	public $ne_newsentry;
-	public $ne_email;
+	
 	public $ne_res;
 	public $ne_resadm;
 	public $ne_resentry;
@@ -113,7 +113,6 @@ class AdminUser extends Database{
 			$this->ne_logged_in_time = $_SESSION['ne_logged_in_time'];
 			$this->ne_member_cd 	= $_SESSION['ne_member_cd'];
 			$this->ne_designation 	= $_SESSION['ne_designation'];
-			$this->ne_email 		= $_SESSION['ne_email'];
 			$this->ne_sadmin 		= $_SESSION['ne_sadmin'];
 			$this->ne_news 			= $_SESSION['ne_news'];
 			$this->ne_newsadm 		= $_SESSION['ne_newsadm'];
@@ -213,9 +212,6 @@ class AdminUser extends Database{
 			$_SESSION['ne_member_cd'] 		= $this->getProperty("member_cd");
 			if($this->isPropertySet("designation", "V"))
 			$_SESSION['ne_designation'] 		= $this->getProperty("designation");
-			
-		if($this->isPropertySet("email", "V"))
-			$_SESSION['ne_email'] 		= $this->getProperty("email");
 		if($this->isPropertySet("fullname_name", "V"))
 			$_SESSION['ne_fullname_name'] 		= $this->getProperty("fullname_name");
 			if($this->isPropertySet("sadmin", "V"))
@@ -374,7 +370,6 @@ class AdminUser extends Database{
 				$_SESSION['ne_fullname_name'],
 				$_SESSION['ne_member_cd'],
 				$_SESSION['ne_designation'],
-				$_SESSION['ne_email'],
 				$_SESSION['ne_sadmin'],
 				$_SESSION['ne_news'],
 				$_SESSION['ne_newsadm'],
