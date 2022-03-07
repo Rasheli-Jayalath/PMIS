@@ -534,25 +534,25 @@ table{
 
   <script>
     $(function(){
-      $("#partials-navbar").load("../../../partials/_navbar.html");
+      $("#partials-navbar").load("../../../partials/_navbar.php");
     });
 </script>
 
 <script>
   $(function(){
-    $("#partials-theme-setting-wrapper").load("../../../partials/_settings-panel.html");
+    $("#partials-theme-setting-wrapper").load("../../../partials/_settings-panel.php");
   });
 </script>
 
 <script>
   $(function(){
-    $("#partials-sidebar-offcanvas").load("../../../partials/_sidebar.html");
+    $("#partials-sidebar-offcanvas").load("../../../partials/_sidebar.php");
   });
 </script>
 
 <script>
 $(function(){
-  $("#partials-footer").load("../../../partials/_footer.html");
+  $("#partials-footer").load("../../../partials/_footer.php");
 });
 </script>
 

@@ -1,198 +1,4 @@
-<?php
 
-
-// include("./fckeditor/fckeditor.php");
-// $news_path=NEWS_PATH;
-$mode	= "I";
-if($_SERVER['REQUEST_METHOD'] == "POST")
-{
-
-		 $title 		= trim($_POST['title1']);
-		 $newsdate 		= date('Y-m-d',strtotime($_POST['newsdate']));
-		 $details 		= trim($_POST['details']);
-		 $status 		= trim($_POST['status']);
-		 $newsfile      = $_FILES['newsfile'];
-		 $old_news_file =trim($_POST['old_news_file']);
-		 $newsfile1		=$_FILES['newsfile1'];
-		 $old_news_file1=trim($_POST['old_news_file1']);
-		  $newsfile2	=$_FILES['newsfile2'];
-		 $old_news_file2=trim($_POST['old_news_file2']);
-		 $newsfile3	=$_FILES['newsfile3'];
-		 $old_news_file3=trim($_POST['old_news_file3']);
-		 $newsfile4	=$_FILES['newsfile4'];
-		 $old_news_file4=trim($_POST['old_news_file4']);
-		$news_cd = ($_POST['mode'] == "U") ? $_POST['news_cd'] : $objAdminUser->genCode("rs_tbl_news", "news_cd");		
-		$objNews->setProperty("news_cd", $news_cd);
-		$objNews->setProperty("title", $title);
-		$objNews->setProperty("details", $details);
-		$objNews->setProperty("newsdate", $newsdate);
-		$objNews->setProperty("ordering", 1);		
-		if(isset($_FILES["newsfile"]["name"])&&$_FILES["newsfile"]["name"]!="")
-		{
-		/* Upload the image File */
-		import("Image");
-		$objImage = new Image($news_path);
-		$objImage->setImage($newsfile);
-		if(($_FILES["newsfile"]["type"] == "image/jpg")|| 
-		($_FILES["newsfile"]["type"] == "image/jpeg")|| 
-		($_FILES["newsfile"]["type"] == "image/gif") || 
-		($_FILES["newsfile"]["type"] == "image/png"))
-		{ # max allowable image size in mb
-			
-			if($old_news_file){
-					@unlink(NEWS_PATH . $old_news_file);
-						
-					}
-			if($objImage->uploadImage($news_cd)){
-				
-					$newsfile = $objImage->filename;
-					$objNews->setProperty("newsfile",$newsfile);
-			}
-		 }
-			else
-		 {
-		 $objCommon->setMessage("Invalid file ", 'Error');
-		 }
-		 
-		}
-		if(isset($_FILES["newsfile1"]["name"])&&$_FILES["newsfile1"]["name"]!="")
-		{
-		/* Upload the image File */
-		import("Image");
-		$objImage = new Image($news_path);
-		$objImage->setImage($newsfile1);
-		if(($_FILES["newsfile1"]["type"] == "image/jpg")|| 
-		($_FILES["newsfile1"]["type"] == "image/jpeg")|| 
-		($_FILES["newsfile1"]["type"] == "image/gif") || 
-		($_FILES["newsfile1"]["type"] == "image/png"))
-		{ # max allowable image size in mb
-			
-			if($old_news_file1){
-					@unlink(NEWS_PATH . $old_news_file1);
-						
-					}
-			if($objImage->uploadImage($news_cd)){
-				
-					$newsfile1 = $objImage->filename;
-					$objNews->setProperty("newsfile1",$newsfile1);
-			}
-		 }
-			else
-		 {
-		 $objCommon->setMessage("Invalid file ", 'Error');
-		 }
-		 
-		}
-		if(isset($_FILES["newsfile2"]["name"])&&$_FILES["newsfile2"]["name"]!="")
-		{
-		/* Upload the image File */
-		import("Image");
-		$objImage = new Image($news_path);
-		$objImage->setImage($newsfile2);
-		if(($_FILES["newsfile2"]["type"] == "image/jpg")|| 
-		($_FILES["newsfile2"]["type"] == "image/jpeg")|| 
-		($_FILES["newsfile2"]["type"] == "image/gif") || 
-		($_FILES["newsfile2"]["type"] == "image/png"))
-		{ # max allowable image size in mb
-			
-			if($old_news_file2){
-					@unlink(NEWS_PATH . $old_news_file2);
-						
-					}
-			if($objImage->uploadImage($news_cd)){
-				
-					$newsfile2 = $objImage->filename;
-					$objNews->setProperty("newsfile2",$newsfile2);
-			}
-		 }
-			else
-		 {
-		 $objCommon->setMessage("Invalid file ", 'Error');
-		 }
-		 
-		}
-		if(isset($_FILES["newsfile3"]["name"])&&$_FILES["newsfile3"]["name"]!="")
-		{
-		/* Upload the image File */
-		import("Image");
-		$objImage = new Image($news_path);
-		$objImage->setImage($newsfile3);
-		if(($_FILES["newsfile3"]["type"] == "image/jpg")|| 
-		($_FILES["newsfile3"]["type"] == "image/jpeg")|| 
-		($_FILES["newsfile3"]["type"] == "image/gif") || 
-		($_FILES["newsfile3"]["type"] == "image/png"))
-		{ # max allowable image size in mb
-			
-			if($old_news_file3){
-					@unlink(NEWS_PATH . $old_news_file3);
-						
-					}
-			if($objImage->uploadImage($news_cd)){
-				
-					$newsfile3 = $objImage->filename;
-					$objNews->setProperty("newsfile3",$newsfile3);
-			}
-		 }
-			else
-		 {
-		 $objCommon->setMessage("Invalid file ", 'Error');
-		 }
-		 
-		}
-		
-		if(isset($_FILES["newsfile4"]["name"])&&$_FILES["newsfile4"]["name"]!="")
-		{
-		/* Upload the image File */
-		import("Image");
-		$objImage = new Image($news_path);
-		$objImage->setImage($newsfile4);
-		if(($_FILES["newsfile4"]["type"] == "image/jpg")|| 
-		($_FILES["newsfile4"]["type"] == "image/jpeg")|| 
-		($_FILES["newsfile4"]["type"] == "image/gif") || 
-		($_FILES["newsfile4"]["type"] == "image/png"))
-		{ # max allowable image size in mb
-			
-			if($old_news_file4){
-					@unlink(NEWS_PATH . $old_news_file4);
-						
-					}
-			if($objImage->uploadImage($news_cd)){
-				
-					$newsfile4 = $objImage->filename;
-					$objNews->setProperty("newsfile4",$newsfile4);
-			}
-		 }
-			else
-		 {
-		 $objCommon->setMessage("Invalid file ", 'Error');
-		 }
-		 
-		}
-		
-	$objNews->setProperty("status", $status);	
-		if($objNews->actNews($_POST['mode'])){
-			$objCommon->setMessage('News item is saved successfully.','Info');
-			redirect('./?p=news_mgmt');
-		}
-	
-	extract($_POST);
-}
-else
-{
-	if(isset($_GET['news_cd']) && !empty($_GET['news_cd']))
-		$news_cd = $_GET['news_cd'];
-	else if(isset($_POST['news_cd']) && !empty($_POST['news_cd']))
-		$news_cd = $_POST['news_cd'];
-	if(isset($news_cd) && !empty($news_cd))
-	{
-		$objNews->setProperty("news_cd", $news_cd);
-		$objNews->lstNews();
-		$data = $objNews->dbFetchArray(1);
-		$mode	= "U";
-		extract($data);
-	}
-}
-?>
 <script>
 function frmValidate(frm){
 	var msg = "<?php echo _JS_FORM_ERROR;?>\r\n-----------------------------------------";
@@ -262,14 +68,9 @@ function doDeleteNewsFile(news_cd,image,name) {
 		<div id="pageContentRight">
 		</div>
 		<div class="clear"></div>
-		<?php 
-		// echo $objCommon->displayMessage();
-		?>
+		<?php echo $objCommon->displayMessage();?>
 		<div class="clear"></div>
-		<div class="NoteTxt"><?php 
-		// echo _NOTE;
-		?>
-		</div>
+		<div class="NoteTxt"><?php echo _NOTE;?></div>
 		<div id="tableContainer">
 		<script type="text/javascript">
 		  $(function() {
@@ -282,7 +83,10 @@ function doDeleteNewsFile(news_cd,image,name) {
 			<input type="hidden" name="mode" id="mode" value="<?php echo $mode;?>" />
         	<input type="hidden" name="news_cd" id="news_cd" value="<?php echo $news_cd;?>" />
        		<div class="formfield b shadowWhite"><?php echo 'Title';?> <span style="color:#FF0000;">*</span>:</div>
-			<div class="formvalue"><input class="rr_input" size="60" type="text" name="title1" id="title1" value="<?php echo $title;?>" /></div>
+			<div class="formvalue">
+				
+			<input class="rr_input" size="60" type="text" name="title1" id="title1" value="<?php echo $title;?>" />
+		</div>
 			<div class="clear"></div>
 			<div class="formfield b shadowWhite"><?php echo 'News Date';?> <span style="color:#FF0000;">*</span>:</div>
 			<div class="formvalue">
